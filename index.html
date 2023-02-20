@@ -21,11 +21,13 @@
 
       <!-- Parte con Slide -->
 
-      <div class="slide active">
-        <img :src="slides[0].image" alt="">
+      <!-- Direttiva "v-for" per pescare ogni Slide da Array e stampare le Proprieta' -->
+      <!-- Operatore ternario per assegnare alla Prima Slide la classe "active" -->
+      <div class="slide" :class="(index===0) ? 'active' : ''" v-for="(slide,index) in slides">
+        <img :src="slide.image">
         <div class="slide-text">
-          <h4>{{slides[0].title}}</h4>
-          <p>{{slides[0].text}}</p>
+          <h4>{{slide.title}}</h4>
+          <p>{{slide.text}}</p>
         </div>
       </div>
 
@@ -85,7 +87,7 @@
       // Fine "data"
     }).mount('#app')
     // Fine App
-    
+
   </script>
 
 
