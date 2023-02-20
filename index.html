@@ -33,8 +33,8 @@
 
       <!-- Parte con pulsanti freccia -->
       <div class="arrow w-100 d-flex justify-content-between">
-        <i id="arrow-left" class="arrow-left fa-solid fa-angle-left"></i>
-        <i id="arrow-right" class="arrow-right fa-solid fa-angle-right "></i>
+        <i id="arrow-left" class="arrow-left fa-solid fa-angle-left" @click="previousSlide()"></i>
+        <i id="arrow-right" class="arrow-right fa-solid fa-angle-right" @click="nextSlide()"></i>
       </div>
 
     </div>
@@ -80,11 +80,65 @@
               title: `Caraibi`,
               text: 'Un luogo paradisiaco che non vorrai lasciare'
             }
-          ]
+          ],
+
+          // Recupero elementi "slide" da DOM da manipolare
+          slideElements: document.getElementsByClassName('slide'),
+
+          // Inizializzo variabile Indice che indica la Slide Corrente
+          indexCurrentSlide: 0
         }
         // Fine "return"
-      }
+      },
       // Fine "data"
+
+      methods: {
+
+        nextSlide(){
+
+          // Recupero Slide Corrente e tolgo la classe "active"
+          let currentSlide = this.slideElements[this.indexCurrentSlide];
+          // console.log(currentSlide);
+          currentSlide.classList.remove('active');
+          console.log("Slide Attiva: " + this.indexCurrentSlide);
+
+          // Incremento Indice per trovare Slide Successiva e controllo per creare "Ciclo Infinito"
+          if (this.indexCurrentSlide < this.slideElements.length - 1){
+            this.indexCurrentSlide = this.indexCurrentSlide + 1;
+          } else {
+            this.indexCurrentSlide = 0;
+          }
+            
+          // Recupero Slide Successiva e aggiungo la classe "active"
+          let nextSlide = this.slideElements[this.indexCurrentSlide];
+          nextSlide.classList.add('active');
+          console.log("Slide Successiva: " + this.indexCurrentSlide);
+        },
+
+        previousSlide(){
+
+          // Recupero Slide Corrente e tolgo la classe "active"
+          let currentSlide = this.slideElements[this.indexCurrentSlide];
+          currentSlide.classList.remove('active');
+          console.log("Slide Attiva: " + this.indexCurrentSlide);
+
+          // Decremento Indice per trovare Slide Precedente e controllo per creare Ciclo Infinito
+          if (this.indexCurrentSlide > 0) {
+            this.indexCurrentSlide = this.indexCurrentSlide - 1;
+          } else {
+            this.indexCurrentSlide = this.slideElements.length - 1;
+          } 
+
+          // Recupero Slide Precedente e aggiungo la classe "active"
+          prevSlide = this.slideElements[this.indexCurrentSlide];
+          prevSlide.classList.add('active');
+          console.log("Slide Precedente: " + this.indexCurrentSlide);
+
+        }
+
+      }
+      // Fine "methods"
+
     }).mount('#app')
     // Fine App
 
