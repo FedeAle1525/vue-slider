@@ -14,29 +14,29 @@
 
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-  <div id="app">{{ message }}
+  <div id="app">
 
-    <!-- <div id="carousel" class="carousel"> -->
+    <!-- Inizio Carosello -->
+    <div id="carousel" class="carousel">
 
-    <!-- Parte con Slide -->
+      <!-- Parte con Slide -->
 
-    <!-- <div class="slide active">
-      <img src="./img/01.jpg" alt="">
-      <div class="slide-text">
-        <h4>Lago di Como</h4>
-        <p>Il luogo ideale se adori pescare</p>
+      <div class="slide active">
+        <img :src="slides[0].image" alt="">
+        <div class="slide-text">
+          <h4>{{slides[0].title}}</h4>
+          <p>{{slides[0].text}}</p>
+        </div>
       </div>
-    </div> -->
 
-   
+      <!-- Parte con pulsanti freccia -->
+      <div class="arrow w-100 d-flex justify-content-between">
+        <i id="arrow-left" class="arrow-left fa-solid fa-angle-left"></i>
+        <i id="arrow-right" class="arrow-right fa-solid fa-angle-right "></i>
+      </div>
 
-    <!-- Parte con pulsanti freccia -->
-    <!-- <div class="arrow w-100 d-flex justify-content-between">
-      <i id="arrow-left" class="arrow-left fa-solid fa-angle-left"></i>
-      <i id="arrow-right" class="arrow-right fa-solid fa-angle-right "></i>
-    </div> -->
-
-    <!-- </div>  -->
+    </div>
+    <!-- Fine Carosello -->
 
   </div>
 
@@ -46,11 +46,46 @@
     createApp({
       data() {
        return {
-          message: 'Hello Vue!'
-        }
-      }
-    }).mount('#app')
+          // // Array di Slide
+          slides: [
 
+            {
+              image: "./img/01.jpg",
+              title: 'Lago di Como',
+              text: 'Il luogo ideale se adori pescare'
+            },
+
+            {
+              image: "./img/02.jpg",
+              title: `Lago d'Iseo`,
+              text: 'Il luogo ideale per chi ama la natura'
+            },
+
+            {
+              image: "./img/03.jpg",
+              title: `Londra`,
+              text: 'Fatti amaliare dal fascino inglese'
+            },
+
+            {
+              image: "./img/04.jpg",
+              title: `Parigi`,
+              text: 'Ideale per una vacanza romantica'
+            },
+
+            {
+              image: "./img/05.jpg",
+              title: `Caraibi`,
+              text: 'Un luogo paradisiaco che non vorrai lasciare'
+            }
+          ]
+        }
+        // Fine "return"
+      }
+      // Fine "data"
+    }).mount('#app')
+    // Fine App
+    
   </script>
 
 
