@@ -22,8 +22,10 @@
       <!-- Parte con Slide -->
 
       <!-- Direttiva "v-for" per pescare ogni Slide da Array e stampare le Proprieta' -->
-      <!-- Operatore ternario per assegnare alla Prima Slide la classe "active" -->
-      <div class="slide" :class="(index===0) ? 'active' : ''" v-for="(slide,index) in slides">
+      <!-- Operatore ternario per assegnare alla Prima Corrente la classe "active" -->
+      <!-- Grazie a Vue la variabile "indexCurrentSlide" viene aggiornata in modo reattivo in base a evento su pulsante, 
+      quindi ho sempre come riferimento la Slide Corrente -->
+      <div class="slide" :class="(index===indexCurrentSlide) ? 'active' : ''" v-for="(slide,index) in slides">
         <img :src="slide.image">
         <div class="slide-text">
           <h4>{{slide.title}}</h4>
@@ -42,13 +44,14 @@
 
   </div>
 
+  <!-- Questo <script> può essere incluso in un file js da collegare -->
   <script>
     const { createApp } = Vue
 
     createApp({
       data() {
        return {
-          // // Array di Slide
+          // // Array di Slide (oggetti)
           slides: [
 
             {
@@ -82,8 +85,8 @@
             }
           ],
 
-          // Recupero elementi "slide" da DOM da manipolare
-          slideElements: document.getElementsByClassName('slide'),
+          // Non ho bisogno di recuperare in questo modo gli elementi del DOM perchè VUE li gestisce in autonomia
+          // slideElements: document.getElementsByClassName('slide'),
 
           // Inizializzo variabile Indice che indica la Slide Corrente
           indexCurrentSlide: 0
@@ -96,43 +99,43 @@
 
         nextSlide(){
 
-          // Recupero Slide Corrente e tolgo la classe "active"
-          let currentSlide = this.slideElements[this.indexCurrentSlide];
-          // console.log(currentSlide);
-          currentSlide.classList.remove('active');
-          console.log("Slide Attiva: " + this.indexCurrentSlide);
+          // Grazie a Operatore Ternario, gestisco l'assegnamento della classe con la direttiva "v-blind"
+          // let currentSlide = this.slideElements[this.indexCurrentSlide];
+          // // console.log(currentSlide);
+          // currentSlide.classList.remove('active');
+          // console.log("Slide Attiva: " + this.indexCurrentSlide);
 
           // Incremento Indice per trovare Slide Successiva e controllo per creare "Ciclo Infinito"
-          if (this.indexCurrentSlide < this.slideElements.length - 1){
+          if (this.indexCurrentSlide < this.slides.length - 1){
             this.indexCurrentSlide = this.indexCurrentSlide + 1;
           } else {
             this.indexCurrentSlide = 0;
           }
             
-          // Recupero Slide Successiva e aggiungo la classe "active"
-          let nextSlide = this.slideElements[this.indexCurrentSlide];
-          nextSlide.classList.add('active');
-          console.log("Slide Successiva: " + this.indexCurrentSlide);
+          // Grazie a Operatore Ternario, gestisco l'assegnamento della classe con la direttiva "v-blind"
+          // let nextSlide = this.slideElements[this.indexCurrentSlide];
+          // nextSlide.classList.add('active');
+          // console.log("Slide Successiva: " + this.indexCurrentSlide);
         },
 
         previousSlide(){
 
-          // Recupero Slide Corrente e tolgo la classe "active"
-          let currentSlide = this.slideElements[this.indexCurrentSlide];
-          currentSlide.classList.remove('active');
-          console.log("Slide Attiva: " + this.indexCurrentSlide);
+          // Grazie a Operatore Ternario, gestisco l'assegnamento della classe con la direttiva "v-blind"
+          // let currentSlide = this.slideElements[this.indexCurrentSlide];
+          // currentSlide.classList.remove('active');
+          // console.log("Slide Attiva: " + this.indexCurrentSlide);
 
           // Decremento Indice per trovare Slide Precedente e controllo per creare Ciclo Infinito
           if (this.indexCurrentSlide > 0) {
             this.indexCurrentSlide = this.indexCurrentSlide - 1;
           } else {
-            this.indexCurrentSlide = this.slideElements.length - 1;
+            this.indexCurrentSlide = this.slides.length - 1;
           } 
 
-          // Recupero Slide Precedente e aggiungo la classe "active"
-          prevSlide = this.slideElements[this.indexCurrentSlide];
-          prevSlide.classList.add('active');
-          console.log("Slide Precedente: " + this.indexCurrentSlide);
+          // Grazie a Operatore Ternario, gestisco l'assegnamento della classe con la direttiva "v-blind"
+          // prevSlide = this.slideElements[this.indexCurrentSlide];
+          // prevSlide.classList.add('active');
+          // console.log("Slide Precedente: " + this.indexCurrentSlide);
 
         }
 
